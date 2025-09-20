@@ -7,6 +7,10 @@
  * core : パッケージを維持する為のパッケージ
  * generate : 任意の構成を生成する為のパッケージ
  * func : 業務システムの主要な機能を提供するパッケージ
+ * 
+ * 処理用クラス
+ * RunGenerate.java : 設定情報を生成する為の実行クラス。
+ * RunFunc.java : 業務システムを生成する為の実行クラス。
  * </pre>
  */
 package busiframe3;
