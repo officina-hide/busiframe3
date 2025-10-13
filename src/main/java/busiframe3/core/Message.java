@@ -1,6 +1,7 @@
 package busiframe3.core;
 
 import busiframe3.core.dao.X_SysMessage;
+import busiframe3.generate.MessageInitializer;
 
 /**
  * メッセージクラス<br>
@@ -22,8 +23,8 @@ public class Message {
 		// 環境情報を保存する。
 		this.env = env;
 		// メッセージ情報の初期化の有無確認
-		if (isInitialized()) {
-
+		if (isInitialized() == false) {
+			MessageInitializer mi = new MessageInitializer(env);
 		}
 	}
 
@@ -35,13 +36,13 @@ public class Message {
 	 */
 	private boolean isInitialized() {
 		boolean initialized = false;
-		/*
-		 * DAOクラスからテーブルの存在を確認し、テーブルが無い場合はテーブル構築・初期情報登録を実施する。	2025/10/01
-		 */
-		X_SysMessage smdao = new X_SysMessage(env);
-		if(smdao.load(0) == false) {
-			smdao.create();
-		}
+//		/*
+//		 * DAOクラスからテーブルの存在を確認し、テーブルが無い場合はテーブル構築・初期情報登録を実施する。	2025/10/01
+//		 */
+//		X_SysMessage smdao = new X_SysMessage(env);
+//		if(smdao.load(0) == false) {
+//			smdao.create();
+//		}
 		return initialized;
 	}
 

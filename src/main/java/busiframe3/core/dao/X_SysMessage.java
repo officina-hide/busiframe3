@@ -37,7 +37,11 @@ public class X_SysMessage {
 	 * @since 2025/10/02
 	 */
 	public void create() {
-		
+		/*
+		 *メッセージ情報テーブル生成<br>
+		 * 初期メッセージ情報登録<br>
+		 * TODO 実装予定 2025/10/03～5
+		 */
 	}
 
 }

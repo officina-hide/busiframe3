@@ -1,5 +1,7 @@
 package busiframe3.core;
 
+import java.sql.Connection;
+
 /**
  * 環境クラス<br>
  * このクラスは、プロジェクトの環境設定を管理するためのクラスです。<br>
@@ -15,6 +17,9 @@ public class Environmwnt {
 	private String user;
 	/** DB : パスワード */
 	private String password;
+	/** DBコネクション */
+	private Connection conn;
+	
 	public String getDsn() {
 		return dsn;
 	}
@@ -32,6 +37,12 @@ public class Environmwnt {
 	}
 	public void setPassword(String password) {
 		this.password = password;
+	}
+	public Connection getConn() {
+		return conn;
+	}
+	public void setConn(Connection connection) {
+		this.conn = connection;		
 	}
 
 }
