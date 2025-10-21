@@ -1,7 +1,8 @@
 package busiframe3.core.dao;
 
-import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -37,4 +38,23 @@ public class BaseDAO {
 			e.printStackTrace();
 		}
 	}
+
+	/**
+	 * @param ptsmt
+	 * @param rs
+	 * @throws SQLException
+	 */
+	public void close(PreparedStatement ptsmt, ResultSet rs) {
+		try {
+			if(rs != null && rs.isClosed() == false) {
+				rs.close();
+			}
+			if(ptsmt != null && ptsmt.isClosed() == false) {
+				ptsmt.close();
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
 }
