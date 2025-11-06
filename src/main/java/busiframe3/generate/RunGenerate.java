@@ -2,6 +2,7 @@ package busiframe3.generate;
 
 import busiframe3.core.Environmwnt;
 import busiframe3.core.Message;
+import busiframe3.core.MessageCode;
 
 /**
  * 設定情報の生成用実行クラス<br>
@@ -26,8 +27,8 @@ public class RunGenerate {
 		// メッセージクラス
 		Message msg = new Message(env);
 		// 開始メッセージ
-		
-		
+		msg.consoleOut(new MessageCode("IN001001"), "システム生成");
+		 
 		// 完了メッセージ
 		
 	}

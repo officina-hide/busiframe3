@@ -50,7 +50,7 @@ public class MessageInitializer implements I_TableInformation, I_BaseCharactor {
 				+ SM + "message_level" + EQ + "1"
 				+ SM + "upper_number" + EQ + "001"
 				+ SM + "lower_number" + EQ + "001"
-				+ SM + "message_text" + EQ + "処理が正常に完了しました。"
+				+ SM + "message_text" + EQ + "$1の処理を開始します。"
 				+ SM + "related_info" + EQ + ""));
 		return params;
 	}

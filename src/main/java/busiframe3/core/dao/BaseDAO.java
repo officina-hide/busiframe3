@@ -40,9 +40,11 @@ public class BaseDAO {
 	}
 
 	/**
-	 * @param ptsmt
-	 * @param rs
-	 * @throws SQLException
+	 * DB切断<br>
+	 * @since 2025/10/07
+	 * @param pstmt 接続情報 
+	 * @param rs 結果セット情報
+	 * @throws SQLException SQL例外
 	 */
 	public void close(PreparedStatement ptsmt, ResultSet rs) {
 		try {
