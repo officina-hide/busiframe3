@@ -28,8 +28,10 @@ public class RunGenerate {
 		Message msg = new Message(env);
 		// 開始メッセージ
 		msg.consoleOut(new MessageCode("IN001001"), "システム生成");
+		// 生成処理(テーブル情報）
 		 
 		// 完了メッセージ
+		msg.consoleOut(new MessageCode("IN001002"), "システム生成");
 		
 	}
 

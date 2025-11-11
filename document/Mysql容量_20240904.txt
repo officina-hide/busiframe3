@@ -1,0 +1,26 @@
+SELECT table_schema, 
+       floor(SUM(data_length + index_length) / 1024 / 1024) AS ALL_MB,
+       floor(SUM((data_length) / 1024 / 1024)) AS DATA_MB,
+       floor(SUM((index_length) / 1024 / 1024)) AS INDEX_MB
+FROM information_schema.tables
+GROUP BY table_schema
+ORDER BY sum(data_length + index_length) DESC;
+
+SELECT table_schema, 
+       floor(SUM(data_length + index_length) / 1024) AS ALL_KB,
+              floor(SUM((data_length) / 1024)) AS DATA_KB,
+                     floor(SUM((index_length) / 1024)) AS INDEX_KB
+                     FROM information_schema.tables
+                     GROUP BY table_schema
+                     ORDER BY sum(data_length + index_length) DESC;
+
+SELECT table_name, 
+       engine AS DBエンジン, 
+       table_rows AS 行数,
+       avg_row_length AS 平均レコード長,
+       floor((data_length+index_length) / 1024 / 1024) AS ALL_MB,
+       floor(data_length / 1024 / 1024) AS DATA_MB,
+       floor(index_length / 1024 / 1024) AS INDEX_MB
+FROM information_schema.tables
+WHERE table_schema = database()
+ORDER BY (data_length + index_length) DESC;

@@ -3,6 +3,8 @@ package busiframe3.core;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import busiframe3.core.dao.BaseDAO;
 import busiframe3.core.dao.X_SysMessage;
@@ -54,11 +56,13 @@ public class Message extends BaseDAO {
 	 * @param params パラメータ配列
 	 */
 	public void consoleOut(MessageCode messageCode, String... params) {
+		// 表示日時の文字列化
+		SimpleDateFormat df = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss : ");
 		// メッセージ情報の取得
 		load(messageCode);
 		String msgText = message.getMessageText();
 		msgText = msgText.replace("$1", params.length >= 1 ? params[0] : "");
-		System.out.println(msgText);
+		System.out.println(df.format(new Date()) +  msgText);
 	}
 
 	/**
