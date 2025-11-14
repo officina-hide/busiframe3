@@ -3,6 +3,7 @@ package busiframe3.generate;
 import busiframe3.core.Environmwnt;
 import busiframe3.core.Message;
 import busiframe3.core.MessageCode;
+import busiframe3.core.dao.SysTable;
 
 /**
  * 設定情報の生成用実行クラス<br>
@@ -26,9 +27,20 @@ public class RunGenerate {
 		env.setUser(USER);
 		// メッセージクラス
 		Message msg = new Message(env);
-		// 開始メッセージ
+		// 開始メッセージ	
 		msg.consoleOut(new MessageCode("IN001001"), "システム生成");
-		// 生成処理(テーブル情報）
+		/*
+		 * テーブル情報とカラム情報からテーブルを生成する。<br>
+		 * テーブル情報(Sys_Table)<br>
+		 * テーブルID(ID)、テーブル物理名、テーブル論理名(名前)、説明<br>
+		 * モデル : SysTable、DAO : X_SysTable<br>
+		 * カラム情報(Sys_Column)<br>
+		 * カラムID(ID)、テーブルID、カラム物理名、カラム論理名(名前)、説明、データ型(参照ID)、サイズ、精度、NULL許可、主キー、外部キー、デフォルト値、自動採番<br>
+		 * モデル : SysColumn、DAO : X_SysColumn<br>
+		 */
+		SysTable table = new SysTable(env);
+		table.initialize();
+		
 		 
 		// 完了メッセージ
 		msg.consoleOut(new MessageCode("IN001002"), "システム生成");

@@ -6,6 +6,8 @@ import java.util.List;
 
 import busiframe3.core.Environmwnt;
 import busiframe3.core.I_BaseCharactor;
+import busiframe3.core.Message;
+import busiframe3.core.MessageCode;
 import busiframe3.core.ParamCollection;
 import busiframe3.core.dao.BaseDAO;
 
@@ -149,6 +151,31 @@ public class GenerateUtils extends BaseDAO implements I_BaseCharactor {
 				close(pstmt, null);
 			}
 //			System.out.println("Executing SQL: " + sql.toString());
+		}
+	}
+
+	/**
+	 * テーブル削除<br>
+	 * COMMAD : TABLE_DROP<br>
+	 * NAME : テーブル名<br>
+	 * 直接呼び出されるときは、COMMANDは使用しない。<br>
+	 * @since 2025/11/14
+	 * @param params パラメータ情報
+	 */
+	public void dropTable(ParamCollection params) {
+		Message msg = new Message(env);
+		PreparedStatement ptsmt = null;
+		StringBuffer sql = new StringBuffer();
+		sql.append("DROP TABLE IF EXISTS").append(SP).append(params.getData("NAME")).append(SM);
+		try {
+			connection(env);
+			ptsmt = env.getConn().prepareStatement(sql.toString());
+			ptsmt.executeUpdate();
+			msg.consoleOut(new MessageCode("IN001003"), params.getData("NAME"));
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(ptsmt, null);
 		}
 	}
 

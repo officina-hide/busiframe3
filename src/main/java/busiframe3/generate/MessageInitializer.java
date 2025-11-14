@@ -60,6 +60,22 @@ public class MessageInitializer implements I_TableInformation, I_BaseCharactor {
 				+ SM + "lower_number" + EQ + "002"
 				+ SM + "message_text" + EQ + "$1の処理を完了しました。"
 				+ SM + "related_info" + EQ + ""));
+		params.add(new ParamCollection(
+				P_TABLE_NAME + EQ + TABLE_NAME_SYS_MESSAGE
+				+ SM + "message_type" + EQ + "IN"
+				+ SM + "message_level" + EQ + "1"
+				+ SM + "upper_number" + EQ + "001"
+				+ SM + "lower_number" + EQ + "003"
+				+ SM + "message_text" + EQ + "テーブル【$1】を削除しました。"
+				+ SM + "related_info" + EQ + ""));
+		params.add(new ParamCollection(
+				P_TABLE_NAME + EQ + TABLE_NAME_SYS_MESSAGE
+				+ SM + "message_type" + EQ + "IN"
+				+ SM + "message_level" + EQ + "1"
+				+ SM + "upper_number" + EQ + "001"
+				+ SM + "lower_number" + EQ + "004"
+				+ SM + "message_text" + EQ + "テーブル【$1】を構築しました。（id項目付き）"
+				+ SM + "related_info" + EQ + ""));
 		return params;
 	}
 
