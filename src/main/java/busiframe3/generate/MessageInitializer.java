@@ -27,7 +27,7 @@ public class MessageInitializer implements I_TableInformation, I_BaseCharactor {
 		// メッセージ情報テーブル生成
 		GenerateUtils gu = new GenerateUtils(env);
 		ParamCollection pc = new ParamCollection(TABLE_PARAM_SYS_MESSAGE);
-		gu.createTable(pc);
+		gu.createTableOld(pc);
 		List<ParamCollection> columnParams = getSysMessageColumnParams();
 		for (ParamCollection columnParam : columnParams) {
 			gu.alterColumns(columnParam);
@@ -75,6 +75,14 @@ public class MessageInitializer implements I_TableInformation, I_BaseCharactor {
 				+ SM + "upper_number" + EQ + "001"
 				+ SM + "lower_number" + EQ + "004"
 				+ SM + "message_text" + EQ + "テーブル【$1】を構築しました。（id項目付き）"
+				+ SM + "related_info" + EQ + ""));
+		params.add(new ParamCollection(
+				P_TABLE_NAME + EQ + TABLE_NAME_SYS_MESSAGE
+				+ SM + "message_type" + EQ + "IN"
+				+ SM + "message_level" + EQ + "1"
+				+ SM + "upper_number" + EQ + "001"
+				+ SM + "lower_number" + EQ + "005"
+				+ SM + "message_text" + EQ + "テーブル【$1】に項目【$2】を追加しました。"
 				+ SM + "related_info" + EQ + ""));
 		return params;
 	}

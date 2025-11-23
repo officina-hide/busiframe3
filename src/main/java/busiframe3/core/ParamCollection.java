@@ -36,6 +36,12 @@ public class ParamCollection {
 				map.put(key, value);
 				params.add(map);
 			}
+			if(keyValue.length == 1) {
+				Map<String, String> map = new HashMap<>();
+				String key = keyValue[0].trim();
+				map.put(key, "");
+				params.add(map);
+			}
 		}
 	}
 

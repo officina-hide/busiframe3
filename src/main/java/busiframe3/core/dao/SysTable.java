@@ -1,6 +1,10 @@
 package busiframe3.core.dao;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import busiframe3.core.Environmwnt;
+import busiframe3.core.I_BaseCharactor;
 import busiframe3.core.ParamCollection;
 import busiframe3.generate.GenerateUtils;
 
@@ -9,7 +13,7 @@ import busiframe3.generate.GenerateUtils;
  * @since 2025/11/13
  * @version 1.0 2025/11/13 新規作成
  */
-public class SysTable extends BaseDAO {
+public class SysTable extends BaseDAO implements I_BaseCharactor {
 
 	/** 環境情報 */
 	@SuppressWarnings("unused")
@@ -35,5 +39,14 @@ public class SysTable extends BaseDAO {
 		gu.dropTable(tableDropParams);
 		ParamCollection tableCreateParams = new ParamCollection("COMMAND=TABLE_CREATE;NAME=Sys_Table;COMMENT=テーブル情報;");
 		gu.createTable(tableCreateParams);
+		List<ParamCollection> alterColumnParams = new ArrayList<>();
+		alterColumnParams.add(new ParamCollection("COMMAND=ALTER_COLUMN_ADD;"+P_TABLE_NAME+"=Sys_Table;"+P_COLUMN_NAME+"=table_name;"
+			+ P_COLUMN_TYPE+EQ+C_STRING+SM+P_COLUMN_SIZE+EQ+"100;"
+			+P_IS_NOT_NULL+SM+P_IS_UNIQUE+SM+P_COMMENT+EQ+"テーブル名"));
+		System.out.println("alterColumnParams=" + alterColumnParams.get(0).toString());
+		
+		for (ParamCollection param : alterColumnParams) {
+			gu.alterColumns(param);
+		}
 	}
 }

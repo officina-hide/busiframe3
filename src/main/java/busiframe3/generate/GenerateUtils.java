@@ -37,7 +37,7 @@ public class GenerateUtils extends BaseDAO implements I_BaseCharactor {
 	 * @param tableName テーブル名
 	 * @param params パラメータ情報
 	 */
-	public void createTable(ParamCollection params) {
+	public void createTableOld(ParamCollection params) {
 		PreparedStatement ptsmt = null;
 		// テーブル削除
 		StringBuffer sql = new StringBuffer();
@@ -108,6 +108,7 @@ public class GenerateUtils extends BaseDAO implements I_BaseCharactor {
 		try {
 			connection(env);
 			pstmt = env.getConn().prepareStatement(sql.toString());
+			System.out.println("Executing SQL: " + sql.toString());
 			pstmt.executeUpdate();
 		} catch (Exception e) {
 			System.err.println("Error executing SQL: " + sql);
@@ -172,6 +173,32 @@ public class GenerateUtils extends BaseDAO implements I_BaseCharactor {
 			ptsmt = env.getConn().prepareStatement(sql.toString());
 			ptsmt.executeUpdate();
 			msg.consoleOut(new MessageCode("IN001003"), params.getData("NAME"));
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(ptsmt, null);
+		}
+	}
+
+	/**
+	 * テーブル生成<br>
+	 * 単純にIDだけを持ったテーブルを生成する。<br>
+	 * IDは自動採番し、主キーとする。<br>
+	 * @since 2025/11/14
+	 * @param params パラメータ情報
+	 */
+	public void createTable(ParamCollection params) {
+		Message msg = new Message(env);
+		PreparedStatement ptsmt = null;
+		StringBuffer sql = new StringBuffer();
+		sql.append("CREATE TABLE").append(SP).append(params.getData("NAME")).append(SP).append("(");
+		sql.append("id INT PRIMARY KEY AUTO_INCREMENT");
+		sql.append(")").append(SP).append("COMMENT").append(SP).append(SQ).append(params.getData("COMMENT")).append(SQ).append(SM);
+		try {
+			connection(env);
+			ptsmt = env.getConn().prepareStatement(sql.toString());
+			ptsmt.executeUpdate();
+			msg.consoleOut(new MessageCode("IN001004"), params.getData("NAME"));
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
