@@ -21,6 +21,8 @@ public class GenerateUtils extends BaseDAO implements I_BaseCharactor {
 
 	/** 環境情報 */
 	private Environmwnt env;
+	/** メッセージクラス */
+	Message msg;
 	
 	/**
 	 * コンストラクタ<br>
@@ -29,6 +31,9 @@ public class GenerateUtils extends BaseDAO implements I_BaseCharactor {
 	 */
 	public GenerateUtils(Environmwnt env) {
 		this.env = env;
+		if(env.isMessageInitialFLG() == false) {
+			msg = new Message(env);
+		}
 	}
 
 	/**
@@ -87,6 +92,9 @@ public class GenerateUtils extends BaseDAO implements I_BaseCharactor {
 			case C_BOOLEAN:
 				sql.append(SP).append("BOOLEAN");
 				break;
+			case C_DATETIME:
+				sql.append(SP).append("DATETIME");
+					
 		}
 		if (params.getData(P_IS_NOT_NULL) != null ) {
 			sql.append(SP).append("NOT NULL");
@@ -97,9 +105,13 @@ public class GenerateUtils extends BaseDAO implements I_BaseCharactor {
 		if (params.getData(P_IS_PRIMARY_KEY) != null) {
 			sql.append(SP).append("PRIMARY KEY");
 		}
-		if (params.getData("default_value") != null) {
+		if (params.getData(P_DEFAULT_VALUE) != null) {
 			sql.append(SP).append("DEFAULT").append(SP)
-				.append(SQ).append(params.getData("default_value")).append(SQ);
+				.append(SQ).append(params.getData(P_DEFAULT_VALUE)).append(SQ);
+		}
+		if (params.getData(P_DEFAULT_VALUE_NSQ) != null) {
+			sql.append(SP).append("DEFAULT").append(SP)
+				.append(params.getData(P_DEFAULT_VALUE_NSQ));
 		}
 		if (params.getData(P_COMMENT) != null) {
 			sql.append(SP).append("COMMENT").append(SP)
@@ -108,8 +120,10 @@ public class GenerateUtils extends BaseDAO implements I_BaseCharactor {
 		try {
 			connection(env);
 			pstmt = env.getConn().prepareStatement(sql.toString());
-			System.out.println("Executing SQL: " + sql.toString());
 			pstmt.executeUpdate();
+			if(msg != null) {
+				msg.consoleOut(new MessageCode("IN001005"), params.getData(P_TABLE_NAME), params.getData(P_COLUMN_NAME));
+			}
 		} catch (Exception e) {
 			System.err.println("Error executing SQL: " + sql);
 			e.printStackTrace();
@@ -151,7 +165,6 @@ public class GenerateUtils extends BaseDAO implements I_BaseCharactor {
 			} finally {
 				close(pstmt, null);
 			}
-//			System.out.println("Executing SQL: " + sql.toString());
 		}
 	}
 
@@ -164,7 +177,6 @@ public class GenerateUtils extends BaseDAO implements I_BaseCharactor {
 	 * @param params パラメータ情報
 	 */
 	public void dropTable(ParamCollection params) {
-		Message msg = new Message(env);
 		PreparedStatement ptsmt = null;
 		StringBuffer sql = new StringBuffer();
 		sql.append("DROP TABLE IF EXISTS").append(SP).append(params.getData("NAME")).append(SM);
@@ -188,7 +200,6 @@ public class GenerateUtils extends BaseDAO implements I_BaseCharactor {
 	 * @param params パラメータ情報
 	 */
 	public void createTable(ParamCollection params) {
-		Message msg = new Message(env);
 		PreparedStatement ptsmt = null;
 		StringBuffer sql = new StringBuffer();
 		sql.append("CREATE TABLE").append(SP).append(params.getData("NAME")).append(SP).append("(");

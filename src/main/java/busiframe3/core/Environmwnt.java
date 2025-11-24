@@ -19,6 +19,8 @@ public class Environmwnt {
 	private String password;
 	/** DBコネクション */
 	private Connection conn;
+	/** メッセージ初期化フラグ */
+	private boolean messageInitialFLG = false;
 	
 	public String getDsn() {
 		return dsn;
@@ -43,6 +45,12 @@ public class Environmwnt {
 	}
 	public void setConn(Connection connection) {
 		this.conn = connection;		
+	}
+	public boolean isMessageInitialFLG() {
+		return messageInitialFLG;
+	}
+	public void setMessageInitialFLG(boolean messageInitialFLG) {
+		this.messageInitialFLG = messageInitialFLG;
 	}
 
 }

@@ -33,22 +33,22 @@ public class Message extends BaseDAO {
 		// 環境情報を保存する。
 		this.env = env;
 		// メッセージ情報の初期化の有無確認
-		if (isInitialized() == false) {
+		if (env.isMessageInitialFLG() == true) {
 			new MessageInitializer(env);
 		}
 	}
-
-	/**
-	 * メッセージ情報の初期化の有無確認<br>
-	 * 
-	 * @since 2025/10/01
-	 * @return true:初期化済み false:未初期化
-	 */
-	private boolean isInitialized() {
-		boolean initialized = false;
-		return initialized;
-	}
-
+//
+//	/**
+//	 * メッセージ情報の初期化の有無確認<br>
+//	 * 
+//	 * @since 2025/10/01
+//	 * @return true:初期化済み false:未初期化
+//	 */
+//	private boolean isInitialized() {
+//		boolean initialized = false;
+//		return initialized;
+//	}
+//
 	/**
 	 * メッセージコンソール出力<br>
 	 * @since 2025/10/04
@@ -56,12 +56,20 @@ public class Message extends BaseDAO {
 	 * @param params パラメータ配列
 	 */
 	public void consoleOut(MessageCode messageCode, String... params) {
+		if(env.isMessageInitialFLG() ==true ) {
+			return;
+		}
 		// 表示日時の文字列化
 		SimpleDateFormat df = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss : ");
 		// メッセージ情報の取得
 		load(messageCode);
 		String msgText = message.getMessageText();
-		msgText = msgText.replace("$1", params.length >= 1 ? params[0] : "");
+		if(params.length >= 1) {
+			msgText = msgText.replace("$1", params.length >= 1 ? params[0] : "");
+		}
+		if(params.length >= 2) {
+			msgText = msgText.replace("$2", params.length >= 1 ? params[1] : "");
+		}
 		System.out.println(df.format(new Date()) +  msgText);
 	}
 

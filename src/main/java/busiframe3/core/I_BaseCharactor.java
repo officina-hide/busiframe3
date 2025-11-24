@@ -30,6 +30,10 @@ public interface I_BaseCharactor {
 	public final String P_IS_UNIQUE = "isUnique";
 	/** 主キー指定　*/
 	public final String P_IS_PRIMARY_KEY = "isPrimaryKey";
+	/** 初期値 */
+	public final String P_DEFAULT_VALUE = "defaultValue";
+	/** 初期値（関数指定） */
+	public final String P_DEFAULT_VALUE_NSQ = "defaultValueNotSQ";
 
 	/** カラム型 : 文字列 */
 	public final String C_STRING = "STRING";
@@ -39,5 +43,7 @@ public interface I_BaseCharactor {
 	public final String C_TEXT = "TEXT";
 	/** カラム型 : 真偽値 */
 	public final String C_BOOLEAN = "BOOLEAN";
+	/** カラム型 : 日時 */
+	public final String C_DATETIME = "DATETIME";
 
 }

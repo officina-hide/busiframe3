@@ -43,8 +43,15 @@ public class SysTable extends BaseDAO implements I_BaseCharactor {
 		alterColumnParams.add(new ParamCollection("COMMAND=ALTER_COLUMN_ADD;"+P_TABLE_NAME+"=Sys_Table;"+P_COLUMN_NAME+"=table_name;"
 			+ P_COLUMN_TYPE+EQ+C_STRING+SM+P_COLUMN_SIZE+EQ+"100;"
 			+P_IS_NOT_NULL+SM+P_IS_UNIQUE+SM+P_COMMENT+EQ+"テーブル名"));
-		System.out.println("alterColumnParams=" + alterColumnParams.get(0).toString());
-		
+		alterColumnParams.add(new ParamCollection("COMMAND=ALTER_COLUMN_ADD;"+P_TABLE_NAME+"=Sys_Table;"+P_COLUMN_NAME+"=description;"
+			+ P_COLUMN_TYPE+EQ+C_STRING+SM+P_COLUMN_SIZE+EQ+"255;"
+			+P_COMMENT+EQ+"説明"));
+		alterColumnParams.add(new ParamCollection("COMMAND=ALTER_COLUMN_ADD;"+P_TABLE_NAME+"=Sys_Table;"+P_COLUMN_NAME+"=created_at;"
+			+ P_COLUMN_TYPE+EQ+C_DATETIME+SM+P_DEFAULT_VALUE_NSQ+EQ+"CURRENT_TIMESTAMP;"
+			+P_IS_NOT_NULL+SM+P_COMMENT+EQ+"作成日時"));
+		alterColumnParams.add(new ParamCollection("COMMAND=ALTER_COLUMN_ADD;"+P_TABLE_NAME+"=Sys_Table;"+P_COLUMN_NAME+"=updated_at;"
+			+ P_COLUMN_TYPE+EQ+C_DATETIME+SM+P_DEFAULT_VALUE_NSQ+EQ+"CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP;"
+			+P_IS_NOT_NULL+SM+P_COMMENT+EQ+"更新日時"));
 		for (ParamCollection param : alterColumnParams) {
 			gu.alterColumns(param);
 		}

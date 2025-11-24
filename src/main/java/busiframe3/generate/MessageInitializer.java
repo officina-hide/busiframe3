@@ -35,6 +35,8 @@ public class MessageInitializer implements I_TableInformation, I_BaseCharactor {
 		// 初期登録
 		List<ParamCollection> dataParams = getSysMessageDataParams();
 		gu.entryData(dataParams);
+		// 初期化フラグをoffにする。
+		env.setMessageInitialFLG(false);
 	}
 
 	/**

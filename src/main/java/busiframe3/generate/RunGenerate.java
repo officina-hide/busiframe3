@@ -25,6 +25,7 @@ public class RunGenerate {
 		env.setDsn(DNS);
 		env.setPassword(PASSWORD);
 		env.setUser(USER);
+		env.setMessageInitialFLG(true);
 		// メッセージクラス
 		Message msg = new Message(env);
 		// 開始メッセージ	
