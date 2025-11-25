@@ -148,6 +148,10 @@ public class GenerateUtils extends BaseDAO implements I_BaseCharactor {
 				if (key.equals(P_TABLE_NAME)) {
 					continue;
 				}
+				if(key.equals("COMMAND")) {
+					continue;
+				}
+				
 				if (!first) {
 					sql.append(",").append(SP);
 				}
