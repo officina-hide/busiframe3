@@ -57,6 +57,7 @@ public class SysTable extends BaseDAO implements I_BaseCharactor {
 			+ P_COLUMN_TYPE+EQ+C_DATETIME+SM+P_DEFAULT_VALUE_NSQ+EQ+"CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP;"
 			+P_IS_NOT_NULL+SM
 			+P_COMMENT+EQ+"更新日時"));
+		
 		for (ParamCollection param : alterColumnParams) {
 			gu.alterColumns(param);
 		}

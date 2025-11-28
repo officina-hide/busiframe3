@@ -3,6 +3,7 @@ package busiframe3.generate;
 import busiframe3.core.Environmwnt;
 import busiframe3.core.Message;
 import busiframe3.core.MessageCode;
+import busiframe3.core.dao.SysColumn;
 import busiframe3.core.dao.SysTable;
 
 /**
@@ -41,6 +42,8 @@ public class RunGenerate {
 		 */
 		SysTable table = new SysTable(env);
 		table.initialize();
+		SysColumn column = new SysColumn(env);
+		column.initialize();
 		
 		 
 		// 完了メッセージ
