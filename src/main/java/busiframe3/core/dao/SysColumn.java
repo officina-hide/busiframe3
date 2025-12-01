@@ -47,6 +47,18 @@ public class SysColumn implements I_BaseCharactor {
 			+P_COLUMN_TYPE+EQ+C_STRING+SM+P_COLUMN_SIZE+EQ+"100;"
 			+P_IS_NOT_NULL+SM
 			+P_COMMENT+EQ+"カラム物理名"));
+		alterColumnParams.add(new ParamCollection("COMMAND=ALTER_COLUMN_ADD;"+P_TABLE_NAME+EQ+"Sys_Column"+SM+P_COLUMN_NAME+"=column_type;"
+			+P_COLUMN_TYPE+EQ+C_INT+SM
+			+P_IS_NOT_NULL+SM
+			+P_COMMENT+EQ+"カラム種別"));
+		alterColumnParams.add(new ParamCollection("COMMAND=ALTER_COLUMN_ADD;"+P_TABLE_NAME+EQ+"Sys_Column"+SM+P_COLUMN_NAME+"=column_size;"
+			+P_COLUMN_TYPE+EQ+C_INT+SM
+			+P_COMMENT+EQ+"カラムサイズ"));
+		alterColumnParams.add(new ParamCollection("COMMAND=ALTER_COLUMN_ADD;"+P_TABLE_NAME+EQ+"Sys_Column"+SM+P_COLUMN_NAME+"=is_not_null;"
+			+P_COLUMN_TYPE+EQ+C_BOOLEAN+SM
+			+P_IS_NOT_NULL+SM
+			+P_DEFAULT_VALUE_NSQ+EQ+"false;"
+			+P_COMMENT+EQ+"NOT NULL設定"));
 		
 		for (ParamCollection param : alterColumnParams) {
 			gu.alterColumns(param);
