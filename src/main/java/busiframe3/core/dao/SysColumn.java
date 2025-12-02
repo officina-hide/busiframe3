@@ -59,6 +59,25 @@ public class SysColumn implements I_BaseCharactor {
 			+P_IS_NOT_NULL+SM
 			+P_DEFAULT_VALUE_NSQ+EQ+"false;"
 			+P_COMMENT+EQ+"NOT NULL設定"));
+		alterColumnParams.add(new ParamCollection("COMMAND=ALTER_COLUMN_ADD;"+P_TABLE_NAME+EQ+"Sys_Column"+SM+P_COLUMN_NAME+"=is_primary_key;"
+			+P_COLUMN_TYPE+EQ+C_BOOLEAN+SM
+			+P_IS_NOT_NULL+SM
+			+P_DEFAULT_VALUE_NSQ+EQ+"false;"
+			+P_COMMENT+EQ+"主キー設定"));
+		alterColumnParams.add(new ParamCollection("COMMAND=ALTER_COLUMN_ADD;"+P_TABLE_NAME+EQ+"Sys_Column"+SM+P_COLUMN_NAME+"=description;"
+			+P_COLUMN_TYPE+EQ+C_TEXT+SM+P_COLUMN_SIZE+EQ+"3000;"
+			+P_COMMENT+EQ+"説明"));
+		alterColumnParams.add(new ParamCollection("COMMAND=ALTER_COLUMN_ADD;"+P_TABLE_NAME+EQ+"Sys_Column"+SM+P_COLUMN_NAME+"=comment;"
+			+P_COLUMN_TYPE+EQ+C_STRING+SM+P_COLUMN_SIZE+EQ+"255;"
+			+P_COMMENT+EQ+"コメント(カラム論理名)"));
+		alterColumnParams.add(new ParamCollection("COMMAND=ALTER_COLUMN_ADD;"+P_TABLE_NAME+"=Sys_Column;"+P_COLUMN_NAME+"=created_at;"
+				+ P_COLUMN_TYPE+EQ+C_DATETIME+SM+P_DEFAULT_VALUE_NSQ+EQ+"CURRENT_TIMESTAMP;"
+				+P_IS_NOT_NULL+SM
+				+P_COMMENT+EQ+"作成日時"));
+			alterColumnParams.add(new ParamCollection("COMMAND=ALTER_COLUMN_ADD;"+P_TABLE_NAME+"=Sys_Column;"+P_COLUMN_NAME+"=updated_at;"
+				+ P_COLUMN_TYPE+EQ+C_DATETIME+SM+P_DEFAULT_VALUE_NSQ+EQ+"CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP;"
+				+P_IS_NOT_NULL+SM
+				+P_COMMENT+EQ+"更新日時"));
 		
 		for (ParamCollection param : alterColumnParams) {
 			gu.alterColumns(param);
